@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="og:title" content = "Hotel Booking Predictor">
+    <meta name="author" content = "Nitesh yadav">
+    <meta name="og:image" content = "static/logo.jpg">
+    <meta name="keywords" content = "Flask, Machine Learning, Deep Learning, AI, ML, DL">
+    <meta name="description" content="A Machine Learning and Deep Learning based webapp for hotel booking Prediction.">
+    <title>Hotel Booking Predictor</title>
+    <link rel="icon" href="{{ url_for('static', filename = 'logo.jpg')}}" type = "image/icon type">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        html, body{height:100%; margin:0;}
+
+        body{
+            display:flex;
+            flex-direction: column;
+            background-image: url('static/hotel4.webp');
+        }
+
+    </style>
+</head>
+<body>
+
+    <div style="width:75%; height: 70%; margin-top: 4%; margin-left: 13%; background-color: rgba(41, 39, 39, 0.3); box-shadow: 0 5px 30px black; border: 1% solid #C71585; border-radius: 2%;">
+        <div style = "width:90%; height: 90%; margin-top: 2%; margin-left: 5%;">
+            <center><h3 style = "font-size: 300%; font-family: 'Edu NSW ACT Foundation', cursive; margin-bottom: 3%; color: #00b8e6;">Hotel Booking Predictor</h3></center>
+            <form class="form-horizontal" action="{{ url_for('predict') }}" method="POST">
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "hotel" list="datalistOptions" placeholder="Type of Hotel (Resort Hotel or City Hotel)">
+                                <datalist id="datalistOptions">
+                                <option value="Resort Hotel">
+                                <option value="City Hotel">
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "meal" list="datalistOption" placeholder="Type of Meal (BB, FB, HB, SC or Undefined)">
+                                <datalist id="datalistOption">
+                                <option value="BB">
+                                <option value="FB">
+                                <option value="HB">
+                                <option value="SC">
+                                <option value="Undefined">
+                                </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "market_segment" list="datalist" placeholder="Type of Market Segment">
+                                <datalist id="datalist">
+                                <option value="Direct">
+                                <option value="Corporate">
+                                <option value="Online TA">
+                                <option value="Offline TA/TO">
+                                <option value="Complementary">
+                                <option value="Groups">
+                                <option value="Undefined">
+                                <option value="Aviation">
+                                </datalist>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "distribution_channel" list="datalistOptions1" placeholder="Distribution Channel">
+                                <datalist id="datalistOptions1">
+                                <option value="Direct">
+                                <option value="Corporate">
+                                <option value="TA/TO">
+                                <option value="Undefined">
+                                <option value="GDS">
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "reserved_room_type" list="datalistOptions2" placeholder="Reserved Room Type (C. A, D, E, G, F, H, L, B)">
+                                <datalist id="datalistOptions2">
+                                <option value="C">
+                                <option value="A">
+                                <option value="D">
+                                <option value="E">
+                                <option value="G">
+                                <option value="F">
+                                <option value="H">
+                                <option value="L">
+                                <option value="B">
+                                </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "deposit_type" list="datalistOptions3" placeholder="Deposit Type">
+                                <datalist id="datalistOptions3">
+                                <option value="No Deposit">
+                                <option value="Refundable">
+                                <option value="Non Refund">
+                                </datalist>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "customer_type" list="datalistOptions4" placeholder="Customer Type">
+                                <datalist id="datalistOptions4">
+                                <option value="Transient">
+                                <option value="Contract">
+                                <option value="Transient-Party">
+                                <option value="Group">
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "year" list="datalistOptions5" placeholder="Year (2015, 2014, 2016, 2017)">
+                                <datalist id="datalistOptions5">
+                                <option value="2014">
+                                <option value="2015">
+                                <option value="2016">
+                                <option value="2017">
+                                </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "month" placeholder="Month">
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "day"  placeholder="Day">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "lead_time" placeholder="Lead Time (0 - 737)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "arrival_date_week_number" placeholder="Week number of year for arrival date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "stays_in_weekend_nights" placeholder="Number of weekend nights the Guest Stayed or Booked">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "stays_in_week_nights" placeholder="Number of week nights the Guest stayed or booked">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "adults"  placeholder="Number of adults">
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "children" placeholder="Number of Children">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "babies" placeholder="Number of Babies">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "is_repeated_guest"  placeholder="Repeated guest (1) or not (0)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "previous_cancellations" placeholder="Number of previous bookings that were cancelled">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "previous_bookings_not_canceled" placeholder="Number of previous bookings not cancelled">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "adr" placeholder="Average Daily Rate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "required_car_parking_spaces"  placeholder="Number of car parking spaces required by the customer">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <input style = "border: 1px solid black" class = "form-control" name = "total_of_special_requests" placeholder="Number of special requests made by the customer (e.g. twin bed or high floor)">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-dark btn-block" value="Predict" style="margin-top: 3%;">
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row" style="width: 40%; height: 5%; margin-top: 3%; margin-left: 37%;">
+        <div style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 250%; color: #000000;">
+            {{ prediction_text }}
+        </div>
+    </div>
+</body>
+
+
+</html>
+
